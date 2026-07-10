@@ -9,7 +9,7 @@ description = "Mini-SIEM: ingestão, normalização, consulta e correlação de 
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Diogo Damasceno", email = "dev.diogodamasceno@gmail.com" }]
+authors = [{ name = "Diogo Damasceno", email = "mitszukyo@gmail.com" }]
 keywords = ["security", "siem", "logs", "detection", "cybersecurity"]
 dependencies = []
 
