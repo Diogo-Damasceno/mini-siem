@@ -1,6 +1,6 @@
 """Armazenamento de eventos + regras de correlação/detecção."""
 
-from __future__ import annotations
+
 
 import sqlite3
 from collections import defaultdict

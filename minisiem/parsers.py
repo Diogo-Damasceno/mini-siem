@@ -1,10 +1,10 @@
 """Parsers que normalizam linhas de log em eventos estruturados."""
 
-from __future__ import annotations
+
 
 import re
 from dataclasses import dataclass, field
-from datetime import datetime
+
 
 
 @dataclass
