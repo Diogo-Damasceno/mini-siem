@@ -9,10 +9,10 @@ from datetime import datetime
 
 @dataclass
 class Event:
-    source: str            # ssh | syslog | nginx | generic
+    source: str
     timestamp: str
     host: str = ""
-    event_type: str = ""   # auth_failure, auth_success, etc.
+    event_type: str = ""
     src_ip: str = ""
     user: str = ""
     message: str = ""
@@ -20,18 +20,18 @@ class Event:
     fields: dict = field(default_factory=dict)
 
 
-# sshd: "Failed password for invalid user admin from 1.2.3.4 port 22 ssh2"
+
 _SSH_FAIL = re.compile(
     r"Failed password for (?:invalid user )?(?P<user>\S+) from (?P<ip>\S+)")
 _SSH_OK = re.compile(
     r"Accepted (?:password|publickey) for (?P<user>\S+) from (?P<ip>\S+)")
 _SSH_INVALID = re.compile(r"Invalid user (?P<user>\S+) from (?P<ip>\S+)")
 
-# syslog prefix: "Jan 10 12:00:00 hostname process[pid]:"
+
 _SYSLOG = re.compile(
     r"^(?P<ts>\w{3}\s+\d+\s[\d:]+)\s(?P<host>\S+)\s(?P<proc>\S+?)(?:\[\d+\])?:\s(?P<msg>.*)$")
 
-# nginx access: '1.2.3.4 - - [10/Jan/2026:12:00:00 +0000] "GET /x HTTP/1.1" 404 ...'
+
 _NGINX = re.compile(
     r'^(?P<ip>\S+) \S+ \S+ \[(?P<ts>[^\]]+)\] "(?P<method>\S+) (?P<path>\S+)[^"]*" (?P<status>\d+)')
 
@@ -55,7 +55,7 @@ def parse_line(line: str) -> Event | None:
         return Event(source="syslog", timestamp=ts, host=host,
                      event_type=proc, message=msg, raw=line)
 
-    # tenta ssh direto (sem prefixo syslog)
+
     ssh = _parse_ssh("", "", line, line)
     if ssh.event_type:
         return ssh

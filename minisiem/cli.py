@@ -43,7 +43,7 @@ def main(argv=None):
     elif args.cmd == "stats":
         print(json.dumps(store.stats(), ensure_ascii=False, indent=2))
     elif args.cmd == "detect":
-        # re-lê todos os eventos do banco para rodar regras
+
         from .parsers import Event
         rows = store.query(limit=100000)
         events = [Event(source=r["source"], timestamp=r["timestamp"],
